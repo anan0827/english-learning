@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>英语学习 - IELTS Prep</title>
+<style>
+/* ═══════════════════════════════════════════
+   CSS Reset & Variables
+   ═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f7fc; --bg-card:#fff; --text:#2d2a3a; --text2:#6b6880;
+  --pri:#6c5ce7; --pri2:#a29bfe; --pri-light:#f0eeff;
+  --accent:#fd79a8; --accent-light:#ffeef5;
+  --success:#00b894; --warn:#fdcb6e; --danger:#e17055;
+  --border:#e8e6f0; --shadow:0 2px 12px rgba(108,92,231,0.08);
+  --radius:14px; --radius-sm:10px;
+  --nav-h:64px; --tab-h:62px;
+  --font:system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#12101b; --bg-card:#1c1a2b; --text:#e8e6f0; --text2:#9b98b0;
+    --pri:#a29bfe; --pri2:#6c5ce7; --pri-light:#1f1c35;
+    --accent:#fd79a8; --accent-light:#2d1a28;
+    --border:#2d2a3d; --shadow:0 2px 12px rgba(0,0,0,0.25);
+  }
+}
+html{font-size:16px} body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom, 0px))}
+/* ═══════════════════════════════════════════
+   Layout
+   ═══════════════════════════════════════════ */
+.app{max-width:600px;margin:0 auto;padding:20px 16px 0}
+header{text-align:center;padding:24px 0 12px}
+header h1{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--pri),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header .sub{font-size:.82rem;color:var(--text2);margin-top:2px}
+.page{display:none;animation:fadeIn .25s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* ═══════════════════════════════════════════
+   Bottom Tab Bar
+   ═══════════════════════════════════════════ */
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg-card);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom, 0)}
+.tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;border:none;background:none;color:var(--text2);font-size:.68rem;cursor:pointer;transition:color .2s;gap:3px;min-height:var(--tab-h)}
+.tab-btn .ico{font-size:1.3rem;line-height:1}
+.tab-btn.active{color:var(--pri)}
+.tab-btn .badge{position:absolute;top:4px;right:50%;transform:translateX(18px);background:var(--danger);color:#fff;font-size:.6rem;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.tab-btn{position:relative}
+/* ═══════════════════════════════════════════
+   Dashboard Cards
+   ═══════════════════════════════════════════ */
+.card{background:var(--bg-card);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);margin-bottom:14px;border:1px solid var(--border)}
+.card-row{display:flex;gap:12px;margin-bottom:14px}
+.card-row .card{flex:1;margin-bottom:0}
+.stat-num{font-size:2rem;font-weight:800;color:var(--pri)}
+.stat-label{font-size:.75rem;color:var(--text2);margin-top:2px}
+.progress-bar{height:10px;background:var(--border);border-radius:5px;overflow:hidden;margin:10px 0 6px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--pri),var(--accent));border-radius:5px;transition:width .5s ease}
+.level-badge{display:inline-block;background:var(--pri-light);color:var(--pri);padding:4px 14px;border-radius:20px;font-size:.8rem;font-weight:600}
+.xp-row{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--text2)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:none;border-radius:var(--radius-sm);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-pri{background:var(--pri);color:#fff}
+.btn-pri:hover{background:var(--pri2);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+.btn-sm{padding:6px 14px;font-size:.78rem}
+.btn-block{width:100%;justify-content:center}
+.btn:active{transform:scale(.97)}
+/* ═══════════════════════════════════════════
+   Phonetics
+   ═══════════════════════════════════════════ */
+.section-title{font-size:1rem;font-weight:700;margin:16px 0 10px;padding-left:4px}
+.phoneme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px}
+.phoneme-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s;user-select:none}
+.phoneme-card:active{transform:scale(.93);background:var(--pri-light);border-color:var(--pri2)}
+.phoneme-card .sym{font-size:1.15rem;font-weight:600;font-family:'Georgia','Times New Roman',serif}
+.phoneme-card .ex{font-size:.65rem;color:var(--text2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phoneme-card.playing{background:var(--pri-light);border-color:var(--pri);animation:pulse .6s ease}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(108,92,231,.4)}50%{box-shadow:0 0 0 12px rgba(108,92,231,0)}}
+/* ═══════════════════════════════════════════
+   Vocabulary
+   ═══════════════════════════════════════════ */
+.cat-scroll{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cat-scroll::-webkit-scrollbar{display:none}
+.cat-chip{flex-shrink:0;padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--bg-card);font-size:.78rem;cursor:pointer;white-space:nowrap;transition:all .2s}
+.cat-chip.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.word-card{display:flex;align-items:center;padding:14px;background:var(--bg-card);border-radius:var(--radius-sm);margin-bottom:8px;border:1px solid var(--border);gap:12px;cursor:pointer;transition:all .15s}
+.word-card:active{background:var(--pri-light)}
+.word-card .eng{font-weight:600;font-size:.95rem;min-width:80px}
+.word-card .phon{font-size:.7rem;color:var(--text2);font-family:Georgia,serif}
+.word-card .chn{font-size:.82rem;color:var(--text2);margin-left:auto;text-align:right}
+.word-card .spk{font-size:1.1rem;opacity:.5;flex-shrink:0}
+.word-card .added{color:var(--success);font-size:.7rem;flex-shrink:0}
+/* ═══════════════════════════════════════════
+   Lessons
+   ═══════════════════════════════════════════ */
+.level-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.level-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.level-icon.locked{background:var(--border);opacity:.5}
+.level-icon.done{background:var(--success);color:#fff}
+.level-icon.current{background:var(--pri-light);color:var(--pri)}
+.lesson-item{display:flex;align-items:center;padding:14px;background:var(--bg-card);border-radius:var(--radius-sm);margin-bottom:8px;border:1px solid var(--border);cursor:pointer;transition:all .15s;gap:12px}
+.lesson-item:active{background:var(--pri-light)}
+.lesson-item.locked{opacity:.5;cursor:not-allowed}
+.lesson-item .idx{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;flex-shrink:0}
+.lesson-item .idx.done{background:var(--success);color:#fff}
+.lesson-item .idx.current{background:var(--pri);color:#fff}
+.lesson-item .idx.locked{background:var(--border);color:var(--text2)}
+.lesson-item .info{flex:1}
+.lesson-item .info .title{font-size:.9rem;font-weight:600}
+.lesson-item .info .desc{font-size:.72rem;color:var(--text2)}
+.lesson-content{line-height:1.8;font-size:.9rem}
+.lesson-content h3{font-size:1.05rem;margin:16px 0 8px;color:var(--pri)}
+.lesson-content .example{background:var(--pri-light);padding:12px 14px;border-radius:var(--radius-sm);margin:8px 0;cursor:pointer}
+.lesson-content .example .en{font-weight:600;font-size:.92rem}
+.lesson-content .example .zh{font-size:.78rem;color:var(--text2);margin-top:2px}
+/* ═══════════════════════════════════════════
+   Review
+   ═══════════════════════════════════════════ */
+.flashcard{background:var(--bg-card);border-radius:var(--radius);padding:40px 20px;text-align:center;cursor:pointer;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .4s;user-select:none}
+.flashcard.flipped{transform:rotateY(180deg)}
+.flashcard .front,.flashcard .back{backface-visibility:hidden}
+.flashcard .word{font-size:2rem;font-weight:700}
+.flashcard .phonetic{font-size:.9rem;color:var(--text2);margin-top:6px;font-family:Georgia,serif}
+.flashcard .hint{font-size:.75rem;color:var(--text2);margin-top:16px;opacity:.6}
+.flashcard .meaning{font-size:1.3rem;font-weight:600;color:var(--pri)}
+.flashcard .example-sent{font-size:.82rem;color:var(--text2);margin-top:10px;font-style:italic}
+.rating-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.rating-btn{padding:12px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:.75rem;text-align:center;transition:all .15s}
+.rating-btn:active{transform:scale(.95)}
+.rating-btn.r0:hover{background:#ffeaea;border-color:var(--danger)}
+.rating-btn.r1:hover{background:#fff8e1;border-color:var(--warn)}
+.rating-btn.r2:hover{background:#e8f8f5;border-color:var(--success)}
+.rating-btn.r3:hover{background:#e8f0ff;border-color:var(--pri)}
+.rating-btn .emoji{font-size:1.2rem;display:block}
+/* ═══════════════════════════════════════════
+   Quiz
+   ═══════════════════════════════════════════ */
+.quiz-type-tabs{display:flex;gap:8px;margin-bottom:16px}
+.quiz-type-btn{flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);text-align:center;cursor:pointer;font-size:.78rem;transition:all .15s}
+.quiz-type-btn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.quiz-card{background:var(--bg-card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.quiz-card .question{font-size:1.1rem;font-weight:600;margin-bottom:16px}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;font-size:.9rem;text-align:center}
+.quiz-opt:active{transform:scale(.98)}
+.quiz-opt.correct{border-color:var(--success);background:#e8f8f5}
+.quiz-opt.wrong{border-color:var(--danger);background:#ffeaea}
+.quiz-input{width:100%;padding:14px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:1rem;text-align:center;background:var(--bg);color:var(--text);outline:none}
+.quiz-input:focus{border-color:var(--pri)}
+.quiz-score{text-align:center;font-size:1.5rem;font-weight:800;color:var(--pri);margin:8px 0}
+/* ═══════════════════════════════════════════
+   Modal / Lesson View
+   ═══════════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:var(--bg);z-index:200;overflow-y:auto;display:none}
+.modal-overlay.active{display:block}
+.modal-header{position:sticky;top:0;background:var(--bg);padding:16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);z-index:10}
+.modal-header .back-btn{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--pri);padding:4px}
+.modal-body{padding:16px;max-width:600px;margin:0 auto}
+.lesson-quiz{margin-top:20px;padding:16px;background:var(--pri-light);border-radius:var(--radius)}
+.lesson-quiz .q-title{font-weight:700;margin-bottom:10px;font-size:.9rem}
+.lesson-quiz .q-opt{padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;cursor:pointer;background:var(--bg-card);font-size:.85rem}
+.lesson-quiz .q-opt.correct{background:#d4edda;border-color:var(--success)}
+.lesson-quiz .q-opt.wrong{background:#f8d7da;border-color:var(--danger)}
+/* ═══════════════════════════════════════════
+   Toast
+   ═══════════════════════════════════════════ */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--pri);color:#fff;padding:10px 22px;border-radius:24px;font-size:.85rem;font-weight:600;z-index:300;animation:toastIn .3s ease,toastOut .3s ease 1.5s forwards;pointer-events:none}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes toastOut{from{opacity:1}to{opacity:0}}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text2)}
+.empty-state .emoji{font-size:3rem;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <header>
+    <h1>📚 英语学习</h1>
+    <div class="sub">Step by Step → IELTS</div>
+  </header>
+
+  <!-- ═══ PAGE: Home ═══ -->
+  <div class="page active" id="page-home">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="stat-label">当前等级</div>
+          <div class="level-badge" id="home-level">入门新手 Lv.1</div>
+        </div>
+        <div style="text-align:right">
+          <div class="stat-label">连续学习</div>
+          <div class="stat-num" id="home-streak" style="font-size:1.5rem">0 天</div>
+        </div>
+      </div>
+      <div class="progress-bar" style="margin-top:14px"><div class="progress-fill" id="home-progress" style="width:0%"></div></div>
+      <div class="xp-row"><span>🏆 <span id="home-xp">0</span> XP</span><span>下一个等级: <span id="home-next">200 XP</span></span></div>
+    </div>
+
+    <div class="card-row">
+      <div class="card" style="text-align:center">
+        <div class="stat-num" id="home-due" style="font-size:1.4rem">0</div>
+        <div class="stat-label">今日待复习</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="stat-num" id="home-words" style="font-size:1.4rem">0</div>
+        <div class="stat-label">已学单词</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="stat-num" id="home-lessons" style="font-size:1.4rem">0</div>
+        <div class="stat-label">完成课程</div>
+      </div>
+    </div>
+
+    <button class="btn btn-pri btn-block" onclick="app.navTo('review')" style="margin-bottom:10px">📝 开始今日复习</button>
+    <button class="btn btn-outline btn-block" onclick="app.navTo('lessons')">📖 继续学习课程</button>
+  </div>
+
+  <!-- ═══ PAGE: Phonetics ═══ -->
+  <div class="page" id="page-phonetics">
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button class="btn btn-sm btn-pri" onclick="app.showPhonetics('all')" id="pho-btn-all">全部</button>
+      <button class="btn btn-sm btn-outline" onclick="app.showPhonetics('practice')" id="pho-btn-practice">🎯 练习模式</button>
+    </div>
+    <div id="phonetics-content"></div>
+    <div id="phonetics-practice" style="display:none"></div>
+  </div>
+
+  <!-- ═══ PAGE: Vocabulary ═══ -->
+  <div class="page" id="page-vocabulary">
+    <div class="cat-scroll" id="vocab-cats"></div>
+    <div id="vocab-words"></div>
+  </div>
+
+  <!-- ═══ PAGE: Lessons ═══ -->
+  <div class="page" id="page-lessons">
+    <div id="lessons-list"></div>
+  </div>
+
+  <!-- ═══ PAGE: Review ═══ -->
+  <div class="page" id="page-review">
+    <div id="review-content"></div>
+  </div>
+
+  <!-- ═══ PAGE: Quiz ═══ -->
+  <div class="page" id="page-quiz">
+    <div class="quiz-type-tabs">
+      <button class="quiz-type-btn active" onclick="app.quizMode='match';app.startQuiz()">🔤 释义匹配</button>
+      <button class="quiz-type-btn" onclick="app.quizMode='listen';app.startQuiz()">👂 听音拼写</button>
+      <button class="quiz-type-btn" onclick="app.quizMode='fill';app.startQuiz()">✏️ 选词填空</button>
+    </div>
+    <div id="quiz-content"></div>
+  </div>
+</div>
+
+<!-- ═══ Bottom Tab Bar ═══ -->
+<nav class="tab-bar" id="tab-bar">
+  <button class="tab-btn active" data-page="home"><span class="ico">🏠</span>首页</button>
+  <button class="tab-btn" data-page="phonetics"><span class="ico">🎵</span>音标</button>
+  <button class="tab-btn" data-page="vocabulary"><span class="ico">📚</span>单词</button>
+  <button class="tab-btn" data-page="lessons"><span class="ico">📖</span>课程</button>
+  <button class="tab-btn" data-page="review"><span class="ico">📝</span>复习<span class="badge" id="review-badge" style="display:none">0</span></button>
+  <button class="tab-btn" data-page="quiz"><span class="ico">🎯</span>测试</button>
+</nav>
+
+<!-- ═══ Lesson Modal ═══ -->
+<div class="modal-overlay" id="lesson-modal">
+  <div class="modal-header">
+    <button class="back-btn" onclick="app.closeLesson()">←</button>
+    <span style="font-weight:700" id="modal-title">课程</span>
+  </div>
+  <div class="modal-body" id="modal-body"></div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA: Phonetics (44 phonemes)
+   ═══════════════════════════════════════════ */
+const PHONEMES = {
+  shortVowels: [
+    {sym:'/ɪ/', ex:'sit', word:'sit'},
+    {sym:'/e/', ex:'bed', word:'bed'},
+    {sym:'/æ/', ex:'cat', word:'cat'},
+    {sym:'/ʌ/', ex:'cup', word:'cup'},
+    {sym:'/ɒ/', ex:'hot', word:'hot'},
+    {sym:'/ʊ/', ex:'book', word:'book'},
+    {sym:'/ə/', ex:'about', word:'about'},
+  ],
+  longVowels: [
+    {sym:'/iː/', ex:'see', word:'see'},
+    {sym:'/ɑː/', ex:'car', word:'car'},
+    {sym:'/ɔː/', ex:'door', word:'door'},
+    {sym:'/uː/', ex:'too', word:'too'},
+    {sym:'/ɜː/', ex:'bird', word:'bird'},
+  ],
+  diphthongs: [
+    {sym:'/eɪ/', ex:'say', word:'say'},
+    {sym:'/aɪ/', ex:'my', word:'my'},
+    {sym:'/ɔɪ/', ex:'boy', word:'boy'},
+    {sym:'/əʊ/', ex:'go', word:'go'},
+    {sym:'/aʊ/', ex:'now', word:'now'},
+    {sym:'/ɪə/', ex:'near', word:'near'},
+    {sym:'/eə/', ex:'hair', word:'hair'},
+    {sym:'/ʊə/', ex:'tour', word:'tour'},
+  ],
+  voicedConsonants: [
+    {sym:'/b/', ex:'big', word:'big'},
+    {sym:'/d/', ex:'dog', word:'dog'},
+    {sym:'/g/', ex:'go', word:'go'},
+    {sym:'/v/', ex:'very', word:'very'},
+    {sym:'/ð/', ex:'this', word:'this'},
+    {sym:'/z/', ex:'zoo', word:'zoo'},
+    {sym:'/ʒ/', ex:'vision', word:'vision'},
+    {sym:'/dʒ/', ex:'job', word:'job'},
+    {sym:'/m/', ex:'man', word:'man'},
+    {sym:'/n/', ex:'no', word:'no'},
+    {sym:'/ŋ/', ex:'song', word:'song'},
+    {sym:'/l/', ex:'love', word:'love'},
+    {sym:'/r/', ex:'red', word:'red'},
+    {sym:'/j/', ex:'yes', word:'yes'},
+    {sym:'/w/', ex:'we', word:'we'},
+  ],
+  voicelessConsonants: [
+    {sym:'/p/', ex:'pen', word:'pen'},
+    {sym:'/t/', ex:'tea', word:'tea'},
+    {sym:'/k/', ex:'key', word:'key'},
+    {sym:'/f/', ex:'fish', word:'fish'},
+    {sym:'/θ/', ex:'think', word:'think'},
+    {sym:'/s/', ex:'sun', word:'sun'},
+    {sym:'/ʃ/', ex:'she', word:'she'},
+    {sym:'/tʃ/', ex:'chat', word:'chat'},
+    {sym:'/h/', ex:'hat', word:'hat'},
+  ],
+};
+const PHO_GROUPS = [
+  {key:'shortVowels', label:'🔴 短元音 Short Vowels'},
+  {key:'longVowels', label:'🟢 长元音 Long Vowels'},
+  {key:'diphthongs', label:'🟡 双元音 Diphthongs'},
+  {key:'voicedConsonants', label:'🔵 浊辅音 Voiced'},
+  {key:'voicelessConsonants', label:'⚪ 清辅音 Voiceless'},
+];
+
+/* ═══════════════════════════════════════════
+   DATA: Vocabulary (10 categories × ~20 words)
+   ═══════════════════════════════════════════ */
+const VOCAB = [
+  {cat:'日常生活', icon:'🏠', words:[
+    {en:'schedule', phon:'/ˈʃedjuːl/', zh:'日程安排'},
+    {en:'appointment', phon:'/əˈpɔɪntmənt/', zh:'预约'},
+    {en:'commute', phon:'/kəˈmjuːt/', zh:'通勤'},
+    {en:'grocery', phon:'/ˈɡrəʊsəri/', zh:'杂货'},
+    {en:'laundry', phon:'/ˈlɔːndri/', zh:'洗衣'},
+    {en:'utensil', phon:'/juːˈtensl/', zh:'餐具'},
+    {en:'balcony', phon:'/ˈbælkəni/', zh:'阳台'},
+    {en:'receipt', phon:'/rɪˈsiːt/', zh:'收据'},
+    {en:'renovate', phon:'/ˈrenəveɪt/', zh:'装修'},
+    {en:'maintenance', phon:'/ˈmeɪntənəns/', zh:'维护'},
+    {en:'chore', phon:'/tʃɔːr/', zh:'家务'},
+    {en:'insurance', phon:'/ɪnˈʃʊərəns/', zh:'保险'},
+    {en:'mortgage', phon:'/ˈmɔːrɡɪdʒ/', zh:'按揭贷款'},
+    {en:'tenant', phon:'/ˈtenənt/', zh:'租户'},
+    {en:'landlord', phon:'/ˈlændlɔːrd/', zh:'房东'},
+    {en:'budget', phon:'/ˈbʌdʒɪt/', zh:'预算'},
+    {en:'expense', phon:'/ɪkˈspens/', zh:'开支'},
+    {en:'suburb', phon:'/ˈsʌbɜːrb/', zh:'郊区'},
+    {en:'neighborhood', phon:'/ˈneɪbərhʊd/', zh:'社区'},
+    {en:'household', phon:'/ˈhaʊshəʊld/', zh:'家庭'},
+  ]},
+  {cat:'工作商务', icon:'💼', words:[
+    {en:'deadline', phon:'/ˈdedlaɪn/', zh:'截止日期'},
+    {en:'colleague', phon:'/ˈkɒliːɡ/', zh:'同事'},
+    {en:'negotiate', phon:'/nɪˈɡəʊʃieɪt/', zh:'谈判'},
+    {en:'proposal', phon:'/prəˈpəʊzl/', zh:'提案'},
+    {en:'revenue', phon:'/ˈrevənjuː/', zh:'收入'},
+    {en:'strategy', phon:'/ˈstrætədʒi/', zh:'策略'},
+    {en:'promotion', phon:'/prəˈməʊʃn/', zh:'晋升'},
+    {en:'conference', phon:'/ˈkɒnfərəns/', zh:'会议'},
+    {en:'collaborate', phon:'/kəˈlæbəreɪt/', zh:'合作'},
+    {en:'efficiency', phon:'/ɪˈfɪʃnsi/', zh:'效率'},
+    {en:'entrepreneur', phon:'/ˌɒntrəprəˈnɜːr/', zh:'企业家'},
+    {en:'stakeholder', phon:'/ˈsteɪkhəʊldər/', zh:'利益相关者'},
+    {en:'implement', phon:'/ˈɪmplɪment/', zh:'实施'},
+    {en:'productivity', phon:'/ˌprɒdʌkˈtɪvəti/', zh:'生产力'},
+    {en:'benchmark', phon:'/ˈbentʃmɑːrk/', zh:'基准'},
+    {en:'outsource', phon:'/ˈaʊtsɔːrs/', zh:'外包'},
+    {en:'turnover', phon:'/ˈtɜːrnəʊvər/', zh:'营业额;人员流动'},
+    {en:'invoice', phon:'/ˈɪnvɔɪs/', zh:'发票'},
+    {en:'acquisition', phon:'/ˌækwɪˈzɪʃn/', zh:'收购'},
+    {en:'merger', phon:'/ˈmɜːrdʒər/', zh:'合并'},
+  ]},
+  {cat:'旅行交通', icon:'✈️', words:[
+    {en:'itinerary', phon:'/aɪˈtɪnərəri/', zh:'行程表'},
+    {en:'accommodation', phon:'/əˌkɒməˈdeɪʃn/', zh:'住宿'},
+    {en:'departure', phon:'/dɪˈpɑːrtʃər/', zh:'出发'},
+    {en:'destination', phon:'/ˌdestɪˈneɪʃn/', zh:'目的地'},
+    {en:'boarding pass', phon:'/ˈbɔːrdɪŋ pæs/', zh:'登机牌'},
+    {en:'layover', phon:'/ˈleɪəʊvər/', zh:'中转停留'},
+    {en:'jet lag', phon:'/ˈdʒet læɡ/', zh:'时差反应'},
+    {en:'customs', phon:'/ˈkʌstəmz/', zh:'海关'},
+    {en:'luggage', phon:'/ˈlʌɡɪdʒ/', zh:'行李'},
+    {en:'reservation', phon:'/ˌrezərˈveɪʃn/', zh:'预订'},
+    {en:'currency', phon:'/ˈkʌrənsi/', zh:'货币'},
+    {en:'passport', phon:'/ˈpæspɔːrt/', zh:'护照'},
+    {en:'terminal', phon:'/ˈtɜːrmɪnl/', zh:'航站楼'},
+    {en:'domestic', phon:'/dəˈmestɪk/', zh:'国内的'},
+    {en:'scenic', phon:'/ˈsiːnɪk/', zh:'风景优美的'},
+    {en:'souvenir', phon:'/ˌsuːvəˈnɪr/', zh:'纪念品'},
+    {en:'excursion', phon:'/ɪkˈskɜːrʒn/', zh:'短途旅行'},
+    {en:'hospitality', phon:'/ˌhɒspɪˈtæləti/', zh:'款待;酒店业'},
+    {en:'expedition', phon:'/ˌekspəˈdɪʃn/', zh:'探险'},
+    {en:'voyage', phon:'/ˈvɔɪɪdʒ/', zh:'航行'},
+  ]},
+  {cat:'饮食烹饪', icon:'🍳', words:[
+    {en:'ingredient', phon:'/ɪnˈɡriːdiənt/', zh:'食材'},
+    {en:'cuisine', phon:'/kwɪˈziːn/', zh:'菜系'},
+    {en:'recipe', phon:'/ˈresəpi/', zh:'食谱'},
+    {en:'appetizer', phon:'/ˈæpɪtaɪzər/', zh:'开胃菜'},
+    {en:'beverage', phon:'/ˈbevərɪdʒ/', zh:'饮料'},
+    {en:'nutrition', phon:'/nuːˈtrɪʃn/', zh:'营养'},
+    {en:'organic', phon:'/ɔːrˈɡænɪk/', zh:'有机的'},
+    {en:'grill', phon:'/ɡrɪl/', zh:'烧烤'},
+    {en:'simmer', phon:'/ˈsɪmər/', zh:'文火炖'},
+    {en:'savory', phon:'/ˈseɪvəri/', zh:'咸味的'},
+    {en:'cuisine', phon:'/kwɪˈziːn/', zh:'菜系'},
+    {en:'dairy', phon:'/ˈdeəri/', zh:'乳制品'},
+    {en:'spice', phon:'/spaɪs/', zh:'香料'},
+    {en:'ferment', phon:'/fərˈment/', zh:'发酵'},
+    {en:'leftover', phon:'/ˈleftəʊvər/', zh:'剩菜'},
+    {en:'portion', phon:'/ˈpɔːrʃn/', zh:'份量'},
+    {en:'cutlery', phon:'/ˈkʌtləri/', zh:'餐具'},
+    {en:'aroma', phon:'/əˈrəʊmə/', zh:'香气'},
+    {en:'cuisine', phon:'/kwɪˈziːn/', zh:'菜系'},
+    {en:'refreshment', phon:'/rɪˈfreʃmənt/', zh:'茶点'},
+  ]},
+  {cat:'健康医疗', icon:'🏥', words:[
+    {en:'symptom', phon:'/ˈsɪmptəm/', zh:'症状'},
+    {en:'diagnosis', phon:'/ˌdaɪəɡˈnəʊsɪs/', zh:'诊断'},
+    {en:'prescription', phon:'/prɪˈskrɪpʃn/', zh:'处方'},
+    {en:'pharmacy', phon:'/ˈfɑːrməsi/', zh:'药房'},
+    {en:'allergy', phon:'/ˈælərdʒi/', zh:'过敏'},
+    {en:'chronic', phon:'/ˈkrɒnɪk/', zh:'慢性的'},
+    {en:'therapy', phon:'/ˈθerəpi/', zh:'治疗'},
+    {en:'surgery', phon:'/ˈsɜːrdʒəri/', zh:'手术'},
+    {en:'vaccine', phon:'/ˈvæksiːn/', zh:'疫苗'},
+    {en:'nutrient', phon:'/ˈnuːtriənt/', zh:'营养素'},
+    {en:'insomnia', phon:'/ɪnˈsɒmniə/', zh:'失眠'},
+    {en:'hydration', phon:'/haɪˈdreɪʃn/', zh:'补水'},
+    {en:'cardio', phon:'/ˈkɑːrdiəʊ/', zh:'有氧运动'},
+    {en:'sedentary', phon:'/ˈsedntəri/', zh:'久坐的'},
+    {en:'meditation', phon:'/ˌmedɪˈteɪʃn/', zh:'冥想'},
+    {en:'immune', phon:'/ɪˈmjuːn/', zh:'免疫'},
+    {en:'pharmacist', phon:'/ˈfɑːrməsɪst/', zh:'药剂师'},
+    {en:'ward', phon:'/wɔːrd/', zh:'病房'},
+    {en:'inpatient', phon:'/ˈɪnpeɪʃnt/', zh:'住院病人'},
+    {en:'outpatient', phon:'/ˈaʊtpeɪʃnt/', zh:'门诊病人'},
+  ]},
+  {cat:'科技数码', icon:'💻', words:[
+    {en:'algorithm', phon:'/ˈælɡərɪðm/', zh:'算法'},
+    {en:'bandwidth', phon:'/ˈbændwɪdθ/', zh:'带宽'},
+    {en:'database', phon:'/ˈdeɪtəbeɪs/', zh:'数据库'},
+    {en:'encryption', phon:'/ɪnˈkrɪpʃn/', zh:'加密'},
+    {en:'interface', phon:'/ˈɪntərfeɪs/', zh:'界面'},
+    {en:'artificial', phon:'/ˌɑːrtɪˈfɪʃl/', zh:'人工的'},
+    {en:'automation', phon:'/ˌɔːtəˈmeɪʃn/', zh:'自动化'},
+    {en:'compatible', phon:'/kəmˈpætəbl/', zh:'兼容的'},
+    {en:'cybersecurity', phon:'/ˌsaɪbər sɪˈkjʊərəti/', zh:'网络安全'},
+    {en:'deploy', phon:'/dɪˈplɔɪ/', zh:'部署'},
+    {en:'innovation', phon:'/ˌɪnəˈveɪʃn/', zh:'创新'},
+    {en:'prototype', phon:'/ˈprəʊtətaɪp/', zh:'原型'},
+    {en:'sensor', phon:'/ˈsensər/', zh:'传感器'},
+    {en:'software', phon:'/ˈsɒftweər/', zh:'软件'},
+    {en:'hardware', phon:'/ˈhɑːrdweər/', zh:'硬件'},
+    {en:'upload', phon:'/ˈʌpləʊd/', zh:'上传'},
+    {en:'download', phon:'/ˈdaʊnləʊd/', zh:'下载'},
+    {en:'browser', phon:'/ˈbraʊzər/', zh:'浏览器'},
+    {en:'backup', phon:'/ˈbækʌp/', zh:'备份'},
+    {en:'cloud', phon:'/klaʊd/', zh:'云端'},
+  ]},
+  {cat:'自然环境', icon:'🌿', words:[
+    {en:'climate', phon:'/ˈklaɪmət/', zh:'气候'},
+    {en:'pollution', phon:'/pəˈluːʃn/', zh:'污染'},
+    {en:'sustainable', phon:'/səˈsteɪnəbl/', zh:'可持续的'},
+    {en:'biodiversity', phon:'/ˌbaɪəʊdaɪˈvɜːrsəti/', zh:'生物多样性'},
+    {en:'ecosystem', phon:'/ˈiːkəʊsɪstəm/', zh:'生态系统'},
+    {en:'renewable', phon:'/rɪˈnjuːəbl/', zh:'可再生的'},
+    {en:'conservation', phon:'/ˌkɒnsərˈveɪʃn/', zh:'保护'},
+    {en:'emission', phon:'/ɪˈmɪʃn/', zh:'排放'},
+    {en:'drought', phon:'/draʊt/', zh:'干旱'},
+    {en:'earthquake', phon:'/ˈɜːrθkweɪk/', zh:'地震'},
+    {en:'species', phon:'/ˈspiːʃiːz/', zh:'物种'},
+    {en:'habitat', phon:'/ˈhæbɪtæt/', zh:'栖息地'},
+    {en:'glacier', phon:'/ˈɡleɪsiər/', zh:'冰川'},
+    {en:'carbon', phon:'/ˈkɑːrbən/', zh:'碳'},
+    {en:'solar', phon:'/ˈsəʊlər/', zh:'太阳能的'},
+    {en:'vegetation', phon:'/ˌvedʒəˈteɪʃn/', zh:'植被'},
+    {en:'wildlife', phon:'/ˈwaɪldlaɪf/', zh:'野生动物'},
+    {en:'erosion', phon:'/ɪˈrəʊʒn/', zh:'侵蚀'},
+    {en:'atmosphere', phon:'/ˈætməsfɪr/', zh:'大气层'},
+    {en:'marine', phon:'/məˈriːn/', zh:'海洋的'},
+  ]},
+  {cat:'教育学习', icon:'🎓', words:[
+    {en:'curriculum', phon:'/kəˈrɪkjələm/', zh:'课程'},
+    {en:'scholarship', phon:'/ˈskɒlərʃɪp/', zh:'奖学金'},
+    {en:'tuition', phon:'/tjuˈɪʃn/', zh:'学费'},
+    {en:'seminar', phon:'/ˈsemɪnɑːr/', zh:'研讨会'},
+    {en:'dissertation', phon:'/ˌdɪsərˈteɪʃn/', zh:'论文'},
+    {en:'literacy', phon:'/ˈlɪtərəsi/', zh:'读写能力'},
+    {en:'pedagogy', phon:'/ˈpedəɡɒdʒi/', zh:'教学法'},
+    {en:'vocational', phon:'/vəʊˈkeɪʃənl/', zh:'职业的'},
+    {en:'thesis', phon:'/ˈθiːsɪs/', zh:'毕业论文'},
+    {en:'plagiarism', phon:'/ˈpleɪdʒərɪzəm/', zh:'抄袭'},
+    {en:'enrollment', phon:'/ɪnˈrəʊlmənt/', zh:'注册入学'},
+    {en:'cognitive', phon:'/ˈkɒɡnətɪv/', zh:'认知的'},
+    {en:'mentor', phon:'/ˈmentɔːr/', zh:'导师'},
+    {en:'discipline', phon:'/ˈdɪsəplɪn/', zh:'学科;纪律'},
+    {en:'transcript', phon:'/ˈtrænskrɪpt/', zh:'成绩单'},
+    {en:'undergraduate', phon:'/ˌʌndərˈɡrædʒuət/', zh:'本科生'},
+    {en:'postgraduate', phon:'/ˌpəʊstˈɡrædʒuət/', zh:'研究生'},
+    {en:'proficiency', phon:'/prəˈfɪʃnsi/', zh:'熟练度'},
+    {en:'assess', phon:'/əˈses/', zh:'评估'},
+    {en:'diploma', phon:'/dɪˈpləʊmə/', zh:'文凭'},
+  ]},
+  {cat:'社会文化', icon:'🌍', words:[
+    {en:'democracy', phon:'/dɪˈmɒkrəsi/', zh:'民主'},
+    {en:'diversity', phon:'/daɪˈvɜːrsəti/', zh:'多样性'},
+    {en:'heritage', phon:'/ˈherɪtɪdʒ/', zh:'遗产'},
+    {en:'inequality', phon:'/ˌɪnɪˈkwɒləti/', zh:'不平等'},
+    {en:'legislation', phon:'/ˌledʒɪsˈleɪʃn/', zh:'立法'},
+    {en:'migration', phon:'/maɪˈɡreɪʃn/', zh:'移民'},
+    {en:'prejudice', phon:'/ˈpredʒədɪs/', zh:'偏见'},
+    {en:'urbanization', phon:'/ˌɜːrbənaɪˈzeɪʃn/', zh:'城市化'},
+    {en:'welfare', phon:'/ˈwelfeər/', zh:'福利'},
+    {en:'advocate', phon:'/ˈædvəkeɪt/', zh:'倡导'},
+    {en:'census', phon:'/ˈsensəs/', zh:'人口普查'},
+    {en:'charity', phon:'/ˈtʃærəti/', zh:'慈善'},
+    {en:'ethics', phon:'/ˈeθɪks/', zh:'伦理'},
+    {en:'globalization', phon:'/ˌɡləʊbəlaɪˈzeɪʃn/', zh:'全球化'},
+    {en:'ideology', phon:'/ˌaɪdiˈɒlədʒi/', zh:'意识形态'},
+    {en:'parliament', phon:'/ˈpɑːrləmənt/', zh:'议会'},
+    {en:'refugee', phon:'/ˌrefjuˈdʒiː/', zh:'难民'},
+    {en:'sovereignty', phon:'/ˈsɒvrənti/', zh:'主权'},
+    {en:'tradition', phon:'/trəˈdɪʃn/', zh:'传统'},
+    {en:'volunteer', phon:'/ˌvɒlənˈtɪr/', zh:'志愿者'},
+  ]},
+  {cat:'雅思学术', icon:'📝', words:[
+    {en:'hypothesis', phon:'/haɪˈpɒθəsɪs/', zh:'假设'},
+    {en:'phenomenon', phon:'/fɪˈnɒmɪnən/', zh:'现象'},
+    {en:'significant', phon:'/sɪɡˈnɪfɪkənt/', zh:'显著的'},
+    {en:'consequence', phon:'/ˈkɒnsɪkwəns/', zh:'后果'},
+    {en:'controversial', phon:'/ˌkɒntrəˈvɜːrʃl/', zh:'有争议的'},
+    {en:'inevitable', phon:'/ɪnˈevɪtəbl/', zh:'不可避免的'},
+    {en:'perspective', phon:'/pərˈspektɪv/', zh:'视角'},
+    {en:'predominant', phon:'/prɪˈdɒmɪnənt/', zh:'主导的'},
+    {en:'proportion', phon:'/prəˈpɔːrʃn/', zh:'比例'},
+    {en:'inevitable', phon:'/ɪnˈevɪtəbl/', zh:'不可避免的'},
+    {en:'ambiguous', phon:'/æmˈbɪɡjuəs/', zh:'模棱两可的'},
+    {en:'correlation', phon:'/ˌkɒrəˈleɪʃn/', zh:'关联'},
+    {en:'demonstrate', phon:'/ˈdemənstreɪt/', zh:'展示'},
+    {en:'empirical', phon:'/ɪmˈpɪrɪkl/', zh:'经验主义的'},
+    {en:'inequality', phon:'/ˌɪnɪˈkwɒləti/', zh:'不平等'},
+    {en:'mechanism', phon:'/ˈmekənɪzəm/', zh:'机制'},
+    {en:'paradigm', phon:'/ˈpærədaɪm/', zh:'范式'},
+    {en:'substantial', phon:'/səbˈstænʃl/', zh:'大量的'},
+    {en:'underlying', phon:'/ˌʌndərˈlaɪɪŋ/', zh:'潜在的'},
+    {en:'valid', phon:'/ˈvælɪd/', zh:'有效的'},
+  ]},
+];
+
+/* ═══════════════════════════════════════════
+   DATA: Lessons (6 levels × 5 lessons)
+   ═══════════════════════════════════════════ */
+const LESSONS = [
+  { // Level 1
+    name:'入门新手', icon:'🌱', xpRequired:0, lessons:[
+      {id:'L1-1', title:'英语字母与发音基础', desc:'认识26个字母及基本发音规律', content:`
+        <h3>📖 字母表与发音</h3>
+        <p>英语有<strong>26个字母</strong>，其中5个元音字母(a,e,i,o,u)，21个辅音字母。每个字母有字母名和字母音两种读法。</p>
+        <p>元音字母在开音节中发字母本音（长音），在闭音节中发短音。例如：</p>
+        <div class="example" onclick="app.speak('cake')"><div class="en">🔊 cake（开音节，a发/eɪ/）</div><div class="zh">蛋糕</div></div>
+        <div class="example" onclick="app.speak('cat')"><div class="en">🔊 cat（闭音节，a发/æ/）</div><div class="zh">猫</div></div>
+        <p><strong>关键概念：</strong>开音节 = 以元音字母结尾（如 go, she）；闭音节 = 以辅音字母结尾（如 cat, big）。</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：下面哪个单词是开音节？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. he</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. hat</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. big</div></div>
+      `},
+      {id:'L1-2', title:'国际音标入门(上)', desc:'学习12个单元音音标', content:`
+        <h3>📖 单元音 (Monophthongs)</h3>
+        <p>单元音发音时舌位和口形不变。英语有12个单元音，分为短元音和长元音。</p>
+        <p><strong>短元音（7个）：</strong>/ɪ/ /e/ /æ/ /ʌ/ /ɒ/ /ʊ/ /ə/</p>
+        <p><strong>长元音（5个）：</strong>/iː/ /ɑː/ /ɔː/ /uː/ /ɜː/</p>
+        <p>长元音发音时间比短元音长约<strong>2倍</strong>。注意长音符号"ː"。</p>
+        <div class="example" onclick="app.speak('ship')"><div class="en">🔊 /ɪ/ — ship（短音）</div><div class="zh">船</div></div>
+        <div class="example" onclick="app.speak('sheep')"><div class="en">🔊 /iː/ — sheep（长音）</div><div class="zh">羊</div></div>
+        <p>🔑 <strong>最小对立体：</strong>ship/sheep, bit/beat, fill/feel — 仅靠元音长短区分！</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：/iː/ 是什么类型的音？</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">A. 短元音</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">B. 长元音</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. 双元音</div></div>
+      `},
+      {id:'L1-3', title:'国际音标入门(下)', desc:'学习8个双元音和辅音', content:`
+        <h3>📖 双元音与辅音</h3>
+        <p><strong>双元音（8个）：</strong>由两个元音滑动组成。如 /aɪ/ 从 /a/ 滑向 /ɪ/。</p>
+        <div class="example" onclick="app.speak('my')"><div class="en">🔊 /aɪ/ — my, time, like</div><div class="zh">我的/时间/喜欢</div></div>
+        <div class="example" onclick="app.speak('go')"><div class="en">🔊 /əʊ/ — go, home, know</div><div class="zh">去/家/知道</div></div>
+        <p><strong>辅音（28个）：</strong>分为清辅音（声带不震动）和浊辅音（声带震动）。</p>
+        <p>🔑 用手摸喉咙：发 /p/ 不震动（清），发 /b/ 震动（浊）。</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：/p/ 是清辅音还是浊辅音？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. 清辅音（声带不震动）</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. 浊辅音（声带震动）</div></div>
+      `},
+      {id:'L1-4', title:'基本问候与介绍', desc:'学会用英语打招呼和自我介绍', content:`
+        <h3>📖 Greetings & Introductions</h3>
+        <p><strong>问候语：</strong></p>
+        <div class="example" onclick="app.speak('Hello, how are you')"><div class="en">🔊 Hello, how are you?</div><div class="zh">你好，你好吗？</div></div>
+        <div class="example" onclick="app.speak('Nice to meet you')"><div class="en">🔊 Nice to meet you.</div><div class="zh">很高兴认识你。</div></div>
+        <p><strong>自我介绍：</strong></p>
+        <div class="example" onclick="app.speak('My name is John. I am from China. I work as an engineer.')"><div class="en">🔊 My name is ___. I'm from ___. I work as a ___.</div><div class="zh">我叫___，来自___，我的工作是___。</div></div>
+        <p>🔑 正式场合用 "How do you do?"，非正式用 "How are you?" / "What's up?"</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："Nice to meet you" 的回答是什么？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. Nice to meet you, too.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. I'm fine, thank you.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. Goodbye.</div></div>
+      `},
+      {id:'L1-5', title:'数字、时间与日期', desc:'掌握基本数字和时间表达', content:`
+        <h3>📖 Numbers, Time & Dates</h3>
+        <p><strong>基数词：</strong>one, two, three... hundred, thousand, million</p>
+        <p><strong>序数词：</strong>first, second, third, fourth... </p>
+        <div class="example" onclick="app.speak('It is half past three')"><div class="en">🔊 It's half past three. (3:30)</div><div class="zh">现在是三点半。</div></div>
+        <div class="example" onclick="app.speak('My birthday is on June the fifteenth')"><div class="en">🔊 My birthday is on June 15th.</div><div class="zh">我的生日是6月15日。</div></div>
+        <p>📅 日期格式：英式 "15 June 2026"，美式 "June 15, 2026"</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："a quarter to five" 是几点？</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">A. 5:15</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">B. 4:45</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. 5:45</div></div>
+      `},
+    ]
+  },
+  { // Level 2
+    name:'初级学者', icon:'🌿', xpRequired:200, lessons:[
+      {id:'L2-1', title:'日常对话：购物场景', desc:'学会在商店、超市的英语对话', content:`
+        <h3>📖 Shopping</h3>
+        <div class="example" onclick="app.speak('How much is this')"><div class="en">🔊 How much is this?</div><div class="zh">这个多少钱？</div></div>
+        <div class="example" onclick="app.speak('Do you have this in a larger size')"><div class="en">🔊 Do you have this in a larger size?</div><div class="zh">这个有大一号的吗？</div></div>
+        <div class="example" onclick="app.speak('Can I pay by credit card')"><div class="en">🔊 Can I pay by credit card?</div><div class="zh">可以刷信用卡吗？</div></div>
+        <p>🔑 <strong>实用句型：</strong>I'm looking for ___ / I'd like to return this / Is there a discount?</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："折扣" 用英语怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. discount</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. bargain</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. refund</div></div>
+      `},
+      {id:'L2-2', title:'日常对话：餐厅点餐', desc:'餐厅场景英语表达', content:`
+        <h3>📖 At a Restaurant</h3>
+        <div class="example" onclick="app.speak('I would like to order please')"><div class="en">🔊 I'd like to order, please.</div><div class="zh">我想点餐。</div></div>
+        <div class="example" onclick="app.speak('Could I have the bill please')"><div class="en">🔊 Could I have the bill, please?</div><div class="zh">请给我账单。</div></div>
+        <p>🔑 不要直接说 "I want..."，用 "I'd like..." 或 "Could I have..." 更礼貌。</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：点牛排"七分熟"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. medium well</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. well done</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. rare</div></div>
+      `},
+      {id:'L2-3', title:'现在时态：一般现在时', desc:'掌握一般现在时的用法', content:`
+        <h3>📖 Simple Present Tense</h3>
+        <p>表示<strong>经常性、习惯性</strong>的动作或<strong>客观事实</strong>。</p>
+        <p><strong>结构：</strong>主语 + 动词原形（第三人称单数 + s/es）</p>
+        <div class="example" onclick="app.speak('I go to work every day')"><div class="en">🔊 I go to work every day.</div><div class="zh">我每天上班。</div></div>
+        <div class="example" onclick="app.speak('She works in a bank')"><div class="en">🔊 She works in a bank. (三单+s)</div><div class="zh">她在银行工作。</div></div>
+        <p>🔑 <strong>频率副词：</strong>always > usually > often > sometimes > rarely > never</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：He ___ to school by bus. (用 go 的正确形式)</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">A. go</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">B. goes</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. going</div></div>
+      `},
+      {id:'L2-4', title:'现在时态：现在进行时', desc:'掌握现在进行时的用法', content:`
+        <h3>📖 Present Continuous</h3>
+        <p>表示<strong>此刻正在进行</strong>的动作。</p>
+        <p><strong>结构：</strong>主语 + am/is/are + 动词ing</p>
+        <div class="example" onclick="app.speak('I am learning English now')"><div class="en">🔊 I am learning English now.</div><div class="zh">我正在学英语。</div></div>
+        <p>🔑 区别：一般现在时 = 经常做，现在进行时 = 此刻正在做</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：Listen! She ___ (sing).</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. is singing</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. sings</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. sang</div></div>
+      `},
+      {id:'L2-5', title:'日常对话：问路与交通', desc:'学会问路和乘坐交通工具', content:`
+        <h3>📖 Asking for Directions</h3>
+        <div class="example" onclick="app.speak('Excuse me, how do I get to the station')"><div class="en">🔊 Excuse me, how do I get to the station?</div><div class="zh">请问去车站怎么走？</div></div>
+        <div class="example" onclick="app.speak('Go straight ahead and turn left at the traffic lights')"><div class="en">🔊 Go straight ahead and turn left at the traffic lights.</div><div class="zh">直走，在红绿灯处左转。</div></div>
+        <p>🔑 <strong>方向词：</strong>go straight / turn left / turn right / across from / next to / between</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："在...对面"用英语怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. across from</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. behind</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. on top of</div></div>
+      `},
+    ]
+  },
+  { // Level 3
+    name:'生活达人', icon:'🌟', xpRequired:500, lessons:[
+      {id:'L3-1', title:'过去时态：一般过去时', desc:'描述过去发生的事情', content:`
+        <h3>📖 Simple Past Tense</h3>
+        <p><strong>结构：</strong>主语 + 动词过去式</p>
+        <div class="example" onclick="app.speak('I visited Beijing last year')"><div class="en">🔊 I visited Beijing last year.</div><div class="zh">我去年去了北京。</div></div>
+        <p>🔑 不规则动词需要单独记忆：go→went, see→saw, eat→ate, buy→bought...</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："buy"的过去式是？</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">A. buyed</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">B. bought</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">C. brought</div></div>
+      `},
+      {id:'L3-2', title:'将来时态：一般将来时', desc:'表达未来的计划和预测', content:`
+        <h3>📖 Future Tense</h3>
+        <p><strong>will + 动词原形：</strong>临时决定、预测</p>
+        <p><strong>be going to + 动词原形：</strong>计划好的、有迹象的</p>
+        <div class="example" onclick="app.speak('I am going to study abroad next year')"><div class="en">🔊 I'm going to study abroad next year. (计划)</div></div>
+        <div class="example" onclick="app.speak('I will help you')"><div class="en">🔊 I'll help you. (临时决定)</div></div>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：看天色要下雨了，应该说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. It's going to rain.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. It will rain.</div></div>
+      `},
+      {id:'L3-3', title:'电话英语', desc:'电话场景的常用表达', content:`
+        <h3>📖 On the Phone</h3>
+        <div class="example" onclick="app.speak('Hello, may I speak to Mr Smith please')"><div class="en">🔊 May I speak to Mr. Smith?</div><div class="zh">请问史密斯先生在吗？</div></div>
+        <div class="example" onclick="app.speak('Could you please hold on for a moment')"><div class="en">🔊 Could you hold on for a moment?</div><div class="zh">请稍等一下。</div></div>
+        <p>🔑 电话用语：This is ___ speaking. / I'll call you back. / Sorry, wrong number.</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："请稍等"用英语怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. Hold on, please.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. Hang up, please.</div></div>
+      `},
+      {id:'L3-4', title:'比较级与最高级', desc:'学会比较和描述事物', content:`
+        <h3>📖 Comparatives & Superlatives</h3>
+        <p><strong>比较级：</strong>形容词+er / more+形容词</p>
+        <p><strong>最高级：</strong>形容词+est / most+形容词</p>
+        <div class="example" onclick="app.speak('This is the best decision I have ever made')"><div class="en">🔊 This is the best decision I've ever made.</div><div class="zh">这是我做过最好的决定。</div></div>
+        <p>🔑 good→better→best, bad→worse→worst, far→farther→farthest</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："important"的比较级是？</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">A. importanter</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">B. more important</div></div>
+      `},
+      {id:'L3-5', title:'健康与看医生', desc:'描述症状和就医英语', content:`
+        <h3>📖 At the Doctor's</h3>
+        <div class="example" onclick="app.speak('I have a headache and a fever')"><div class="en">🔊 I have a headache and a fever.</div><div class="zh">我头痛发烧。</div></div>
+        <div class="example" onclick="app.speak('I have been feeling unwell for three days')"><div class="en">🔊 I've been feeling unwell for three days.</div><div class="zh">我不舒服已经三天了。</div></div>
+        <p>🔑 常见症状：cough(咳嗽), sore throat(喉咙痛), runny nose(流鼻涕), rash(皮疹)</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："我对花粉过敏"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. I'm allergic to pollen.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. I hate pollen.</div></div>
+      `},
+    ]
+  },
+  { // Level 4
+    name:'职场能手', icon:'💪', xpRequired:1000, lessons:[
+      {id:'L4-1', title:'商务邮件写作', desc:'学会写专业的英文邮件', content:`
+        <h3>📖 Business Emails</h3>
+        <p><strong>开头：</strong>Dear ___, / I hope this email finds you well.</p>
+        <p><strong>正文：</strong>I am writing to... / Please find attached... / I would appreciate it if...</p>
+        <p><strong>结尾：</strong>Best regards, / Sincerely, / Looking forward to hearing from you.</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："请查收附件"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. Please find attached.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. Please look at the file.</div></div>
+      `},
+      {id:'L4-2', title:'会议英语', desc:'参与英文会议的常用表达', content:`
+        <h3>📖 Meeting English</h3>
+        <div class="example" onclick="app.speak('I would like to raise a point')"><div class="en">🔊 I'd like to raise a point.</div><div class="zh">我想提一点。</div></div>
+        <div class="example" onclick="app.speak('Could you please clarify what you mean')"><div class="en">🔊 Could you clarify what you mean?</div><div class="zh">能说明一下你的意思吗？</div></div>
+        <p>🔑 会议金句：Let's table this for now. / We need to circle back to this. / Let's take this offline.</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："我同意"除了 I agree 还可以说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. I'm on the same page.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. I'm on a different page.</div></div>
+      `},
+      {id:'L4-3', title:'现在完成时', desc:'掌握现在完成时与过去时的区别', content:`
+        <h3>📖 Present Perfect</h3>
+        <p><strong>结构：</strong>have/has + 过去分词</p>
+        <p>表示过去动作对<strong>现在有影响</strong>，或从过去<strong>持续到现在</strong>。</p>
+        <div class="example" onclick="app.speak('I have worked here for five years')"><div class="en">🔊 I have worked here for 5 years. (还在工作)</div></div>
+        <div class="example" onclick="app.speak('I worked there for five years')"><div class="en">🔊 I worked there for 5 years. (已经不在了)</div></div>
+        <p>🔑 关键词：already, yet, just, ever, never, since, for</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：I ___ (not finish) my homework yet.</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. haven't finished</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. didn't finish</div></div>
+      `},
+      {id:'L4-4', title:'面试英语', desc:'英文面试的常见问答', content:`
+        <h3>📖 Job Interview</h3>
+        <div class="example" onclick="app.speak('Tell me about yourself')"><div class="en">🔊 Tell me about yourself.</div><div class="zh">介绍一下你自己。</div></div>
+        <div class="example" onclick="app.speak('My greatest strength is my ability to solve problems under pressure')"><div class="en">🔊 My greatest strength is problem-solving under pressure.</div><div class="zh">我最大的优势是能抗压解决问题。</div></div>
+        <p>🔑 STAR法则：Situation → Task → Action → Result 来回答行为问题</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："你的缺点是什么"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. What is your weakness?</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. What is your bad habit?</div></div>
+      `},
+      {id:'L4-5', title:'演讲与汇报', desc:'做英文演讲的技巧和句型', content:`
+        <h3>📖 Presentations</h3>
+        <p><strong>开场：</strong>Good morning everyone. Today I'd like to talk about...</p>
+        <p><strong>过渡：</strong>Moving on to... / Let's take a look at... / This brings me to my next point.</p>
+        <p><strong>总结：</strong>To sum up... / In conclusion... / Thank you for your attention. Any questions?</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："总结一下"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. To sum up</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. To begin with</div></div>
+      `},
+    ]
+  },
+  { // Level 5
+    name:'流利表达', icon:'🚀', xpRequired:2000, lessons:[
+      {id:'L5-1', title:'观点表达与论证', desc:'学会用英语表达观点并论证', content:`
+        <h3>📖 Expressing Opinions</h3>
+        <p><strong>表达观点：</strong>In my opinion... / From my perspective... / I believe that...</p>
+        <p><strong>论证：</strong>This is because... / The reason is that... / Evidence suggests that...</p>
+        <div class="example" onclick="app.speak('In my opinion, learning a language takes time and consistent effort')"><div class="en">🔊 In my opinion, learning a language takes time and consistent effort.</div></div>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："一方面...另一方面..."怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. On the one hand... on the other hand...</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. One side... other side...</div></div>
+      `},
+      {id:'L5-2', title:'讨论社会话题', desc:'就社会热点进行英语讨论', content:`
+        <h3>📖 Discussing Social Issues</h3>
+        <p>常见话题：education, environment, technology, healthcare, globalization</p>
+        <div class="example" onclick="app.speak('The increasing use of technology has both advantages and disadvantages')"><div class="en">🔊 The increasing use of technology has both advantages and disadvantages.</div></div>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："这是一个有争议的话题"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. This is a controversial issue.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. This is a comfortable issue.</div></div>
+      `},
+      {id:'L5-3', title:'被动语态', desc:'掌握被动语态的用法', content:`
+        <h3>📖 Passive Voice</h3>
+        <p><strong>结构：</strong>be + 过去分词</p>
+        <p>当<strong>不知道/不重要/不想说</strong>动作发出者时使用。</p>
+        <div class="example" onclick="app.speak('English is spoken all over the world')"><div class="en">🔊 English is spoken all over the world.</div></div>
+        <p>🔑 学术写作中大量使用被动语态！</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：把 "They built this bridge in 1990" 改成被动</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. This bridge was built in 1990.</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. This bridge built in 1990.</div></div>
+      `},
+      {id:'L5-4', title:'条件句与虚拟语气', desc:'学会表达假设和虚拟情况', content:`
+        <h3>📖 Conditionals</h3>
+        <p><strong>第一条件句（真实可能）：</strong>If + 现在时, will + 动词原形</p>
+        <div class="example" onclick="app.speak('If it rains tomorrow, I will stay home')"><div class="en">🔊 If it rains, I will stay home.</div></div>
+        <p><strong>第二条件句（虚拟现在）：</strong>If + 过去时, would + 动词原形</p>
+        <div class="example" onclick="app.speak('If I were you, I would take the job')"><div class="en">🔊 If I were you, I would take the job.</div></div>
+        <p>🔑 注意：虚拟语气中 I/he/she 后面用 were，不用 was！</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："如果我是你"正确的表达是？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. If I were you</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. If I was you</div></div>
+      `},
+      {id:'L5-5', title:'图表描述', desc:'雅思小作文：描述图表数据', content:`
+        <h3>📖 Describing Graphs (IELTS Task 1)</h3>
+        <p><strong>趋势词：</strong>increase/rise/grow, decrease/decline/drop, fluctuate, remain stable, peak</p>
+        <div class="example" onclick="app.speak('The number of tourists increased significantly from 2010 to 2020')"><div class="en">🔊 The number increased significantly from 2010 to 2020.</div></div>
+        <p>🔑 副词修饰：sharply(急剧) > significantly(显著) > gradually(逐渐) > slightly(略微)</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试："急剧下降"怎么说？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. drop sharply</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. increase dramatically</div></div>
+      `},
+    ]
+  },
+  { // Level 6
+    name:'雅思冲刺', icon:'🎯', xpRequired:4000, lessons:[
+      {id:'L6-1', title:'雅思写作：大作文结构', desc:'掌握雅思大作文的四段式结构', content:`
+        <h3>📖 IELTS Writing Task 2</h3>
+        <p><strong>四段式结构：</strong></p>
+        <p>1. <strong>Introduction</strong> — 改写题目 + 给出立场</p>
+        <p>2. <strong>Body 1</strong> — 第一个论点 + 解释 + 例子</p>
+        <p>3. <strong>Body 2</strong> — 第二个论点 + 解释 + 例子</p>
+        <p>4. <strong>Conclusion</strong> — 总结 + 重申立场</p>
+        <p>🔑 目标：250字以上，40分钟内完成</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：大作文至少要写多少字？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. 250 words</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. 150 words</div></div>
+      `},
+      {id:'L6-2', title:'雅思口语 Part 1', desc:'日常话题的流利回答技巧', content:`
+        <h3>📖 IELTS Speaking Part 1</h3>
+        <p>时长4-5分钟，关于<strong>日常生活</strong>的简单问题。</p>
+        <p>常见话题：Work/Study, Hometown, Home, Hobbies, Food, Travel</p>
+        <p>🔑 <strong>不要只回答Yes/No！</strong>用 AREA法则：Answer → Reason → Example → Alternative</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：Part 1 考官问 "Do you like music?" 你应该？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. 回答Yes并解释原因给出例子</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. 只回答Yes</div></div>
+      `},
+      {id:'L6-3', title:'雅思口语 Part 2', desc:'2分钟独白技巧', content:`
+        <h3>📖 IELTS Speaking Part 2</h3>
+        <p>拿到<strong>话题卡</strong>，1分钟准备，2分钟独白。</p>
+        <p>🔑 用 <strong>PPF方法</strong>：Past → Present → Future 展开话题</p>
+        <p>每段说3-4句话，加过渡词：Anyway, As I mentioned, The reason why...</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：Part 2 准备时间是几分钟？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. 1 minute</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. 2 minutes</div></div>
+      `},
+      {id:'L6-4', title:'雅思阅读技巧', desc:'快速阅读和定位信息的方法', content:`
+        <h3>📖 IELTS Reading</h3>
+        <p><strong>Skimming（略读）：</strong>快速浏览获取大意，看标题、首段、末段、每段首句。</p>
+        <p><strong>Scanning（扫读）：</strong>带着问题找关键词，数字、人名、日期等。</p>
+        <p>🔑 60分钟做40道题，每篇约20分钟。先读题再读文章！</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：雅思阅读考试多少分钟？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. 60 minutes</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. 90 minutes</div></div>
+      `},
+      {id:'L6-5', title:'雅思听力技巧', desc:'听力题型和关键词技巧', content:`
+        <h3>📖 IELTS Listening</h3>
+        <p>4个部分，40道题，约30分钟+10分钟誊写。</p>
+        <p><strong>Section 1:</strong> 日常对话（最简单）</p>
+        <p><strong>Section 4:</strong> 学术讲座（最难）</p>
+        <p>🔑 <strong>预判法则：</strong>利用读题时间预测答案类型（数字？名字？日期？）</p>
+        <p>⚠️ 注意同义替换！听到的不一定是题目里的原词。</p>
+        <div class="lesson-quiz"><div class="q-title">📝 小测试：听力有几个Section？</div>
+        <div class="q-opt" data-correct="true" onclick="app.checkLessonQuiz(this)">A. 4 sections</div>
+        <div class="q-opt" onclick="app.checkLessonQuiz(this)">B. 3 sections</div></div>
+      `},
+    ]
+  },
+];
+
+/* ═══════════════════════════════════════════
+   DATA: Quiz fill-in-the-blank sentences
+   ═══════════════════════════════════════════ */
+const FILL_SENTENCES = [
+  {s:'I need to ___ an appointment with the doctor.', a:'make', opts:['make','do','take','have']},
+  {s:'She has been ___ English for three years.', a:'learning', opts:['learning','learn','learned','learns']},
+  {s:'The meeting was ___ until next Monday.', a:'postponed', opts:['postponed','canceled','started','called']},
+  {s:'If I ___ you, I would accept the offer.', a:'were', opts:['were','was','am','be']},
+  {s:'This is the ___ movie I have ever seen.', a:'best', opts:['best','better','good','most']},
+  {s:'He asked me ___ I had finished the report.', a:'if', opts:['if','that','what','which']},
+  {s:'The new policy will come ___ effect next month.', a:'into', opts:['into','in','to','on']},
+  {s:'I look forward ___ hearing from you.', a:'to', opts:['to','for','at','on']},
+  {s:'Neither the manager nor the employees ___ satisfied.', a:'were', opts:['were','was','is','are']},
+  {s:'It is essential that he ___ on time.', a:'be', opts:['be','is','will be','was']},
+  {s:'The research ___ that exercise improves memory.', a:'indicates', opts:['indicates','indicate','indicating','indicated']},
+  {s:'___ the weather was bad, we went out.', a:'Although', opts:['Although','Because','Unless','Since']},
+  {s:'There has been a significant ___ in sales this year.', a:'increase', opts:['increase','increasing','increased','increases']},
+  {s:'The book, ___ I bought yesterday, is very interesting.', a:'which', opts:['which','that','what','who']},
+  {s:'By next year, I ___ English for five years.', a:'will have been learning', opts:['will have been learning','will learn','learn','am learning']},
+];
+
+/* ═══════════════════════════════════════════
+   STORAGE
+   ═══════════════════════════════════════════ */
+const STORAGE_KEY = 'englearn_data';
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return null;
+}
+function saveData(d){ localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+function getDefaultData(){
+  return {
+    level:1, xp:0, streak:0, lastStudyDate:'',
+    completedLessons:[], reviewQueue:[], learnedWords:[],
+    quizScores:[], studiedToday:false,
+  };
+}
+
+/* ═══════════════════════════════════════════
+   SPEECH
+   ═══════════════════════════════════════════ */
+function getEnglishVoice(){
+  return new Promise((resolve)=>{
+    const voices = speechSynthesis.getVoices();
+    if(voices.length){
+      const en = voices.find(v=>v.lang==='en-GB'&&v.name.includes('Female')) ||
+                 voices.find(v=>v.lang==='en-GB') ||
+                 voices.find(v=>v.lang==='en-US'&&v.name.includes('Female')) ||
+                 voices.find(v=>v.lang.startsWith('en'));
+      resolve(en || voices[0]);
+    }else{
+      speechSynthesis.onvoiceschanged = ()=>{
+        const v2 = speechSynthesis.getVoices();
+        const en2 = v2.find(v=>v.lang==='en-GB') || v2.find(v=>v.lang.startsWith('en'));
+        resolve(en2 || v2[0]);
+      };
+    }
+  });
+}
+async function speak(text){
+  speechSynthesis.cancel();
+  const voice = await getEnglishVoice();
+  const u = new SpeechSynthesisUtterance(text);
+  u.voice = voice; u.rate = 0.85; u.pitch = 1;
+  u.lang = voice?.lang || 'en-GB';
+  speechSynthesis.speak(u);
+}
+
+/* ═══════════════════════════════════════════
+   SM-2 Algorithm
+   ═══════════════════════════════════════════ */
+function sm2Review(item, quality){
+  // quality: 0=forgot, 1=hard, 2=good, 3=easy
+  if(quality < 1){
+    item.interval = 1;
+    item.reps = 0;
+  }else{
+    if(item.reps === 0) item.interval = 1;
+    else if(item.reps === 1) item.interval = 3;
+    else item.interval = Math.round(item.interval * item.ef);
+    item.reps++;
+  }
+  item.ef = Math.max(1.3, item.ef + (0.1 - (2 - quality) * (0.08 + (2 - quality) * 0.02)));
+  item.nextReview = Date.now() + item.interval * 86400000;
+  return item;
+}
+
+/* ═══════════════════════════════════════════
+   APP
+   ═══════════════════════════════════════════ */
+const app = {
+  data: null,
+  currentPage: 'home',
+  vocabCat: 0,
+  reviewIndex: 0,
+  quizMode: 'match',
+  quizState: null,
+  phoMode: 'all', // 'all' | 'practice'
+  phoPractice: null,
+
+  init(){
+    this.data = loadData() || getDefaultData();
+    this.checkStreak();
+    this.bindTabs();
+    this.renderAll();
+    // Preload voices
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = ()=> speechSynthesis.getVoices();
+
+    // Daily reminder at 8pm
+    this.checkDailyReminder();
+  },
+
+  checkStreak(){
+    const today = new Date().toISOString().slice(0,10);
+    if(this.data.lastStudyDate === today) return;
+    const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    if(this.data.lastStudyDate === yesterday){
+      this.data.streak++;
+    }else if(this.data.lastStudyDate !== today){
+      this.data.streak = 0;
+    }
+    this.data.lastStudyDate = today;
+    this.data.studiedToday = false;
+    saveData(this.data);
+  },
+
+  checkDailyReminder(){
+    // Check if we should show a "welcome back" toast
+    if(!this.data.studiedToday && this.data.streak > 0){
+      setTimeout(()=>this.toast(`🔥 连续学习 ${this.data.streak} 天！继续加油！`), 500);
+    }
+  },
+
+  markStudied(){
+    if(!this.data.studiedToday){
+      this.data.studiedToday = true;
+      this.data.xp += 10;
+      saveData(this.data);
+      this.toast('+10 XP ✨');
+      this.updateLevel();
+      this.renderHome();
+    }
+  },
+
+  addXP(amount){
+    this.data.xp += amount;
+    this.updateLevel();
+    saveData(this.data);
+    this.renderHome();
+  },
+
+  updateLevel(){
+    const levels = [0,200,500,1000,2000,4000];
+    let newLevel = 1;
+    for(let i=levels.length-1;i>=0;i--){
+      if(this.data.xp >= levels[i]){ newLevel = i+1; break; }
+    }
+    if(newLevel > this.data.level){
+      this.data.level = newLevel;
+      this.toast(`🎉 升级了！Lv.${newLevel} ${LESSONS[newLevel-1].name}`);
+    }
+  },
+
+  getDueReviews(){
+    const now = Date.now();
+    return this.data.reviewQueue.filter(item => item.nextReview <= now + 3600000); // include items due within 1 hour
+  },
+
+  toast(msg){
+    const existing = document.querySelector('.toast');
+    if(existing) existing.remove();
+    const el = document.createElement('div');
+    el.className = 'toast'; el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(()=> el.remove(), 2000);
+  },
+
+  bindTabs(){
+    document.querySelectorAll('.tab-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const page = btn.dataset.page;
+        this.navTo(page);
+      });
+    });
+  },
+
+  navTo(page){
+    this.currentPage = page;
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    const pageEl = document.getElementById('page-'+page);
+    if(pageEl) pageEl.classList.add('active');
+    const tabBtn = document.querySelector(`[data-page="${page}"]`);
+    if(tabBtn) tabBtn.classList.add('active');
+
+    if(page==='phonetics') this.renderPhonetics();
+    if(page==='vocabulary') this.renderVocabulary();
+    if(page==='lessons') this.renderLessons();
+    if(page==='review') this.renderReview();
+    if(page==='quiz') { this.quizState=null; this.startQuiz(); }
+    if(page==='home') this.renderHome();
+
+    // Scroll to top
+    document.getElementById('app').scrollIntoView({behavior:'smooth'});
+  },
+
+  /* ── Home ─────────────────────── */
+  renderHome(){
+    const d = this.data;
+    const levelCfg = LESSONS[d.level-1];
+    const levels = [0,200,500,1000,2000,4000];
+    const curXp = d.xp - (levels[d.level-1]||0);
+    const nextXp = (levels[d.level]||99999) - (levels[d.level-1]||0);
+    const pct = d.level >= 6 ? 100 : Math.min(100, Math.round(curXp / nextXp * 100));
+
+    document.getElementById('home-level').textContent = `${levelCfg.name} Lv.${d.level}`;
+    document.getElementById('home-streak').textContent = d.streak + ' 天';
+    document.getElementById('home-xp').textContent = d.xp;
+    document.getElementById('home-next').textContent = d.level >= 6 ? 'MAX' : (levels[d.level]||99999) + ' XP';
+    document.getElementById('home-progress').style.width = pct + '%';
+    document.getElementById('home-due').textContent = this.getDueReviews().length;
+    document.getElementById('home-words').textContent = d.learnedWords.length;
+    document.getElementById('home-lessons').textContent = d.completedLessons.length;
+
+    // Update review badge
+    const due = this.getDueReviews().length;
+    const badge = document.getElementById('review-badge');
+    if(due > 0){ badge.style.display='flex'; badge.textContent = due; }
+    else badge.style.display = 'none';
+  },
+
+  /* ── Phonetics ────────────────── */
+  showPhonetics(mode){
+    this.phoMode = mode;
+    document.getElementById('pho-btn-all').className = mode==='all' ? 'btn btn-sm btn-pri' : 'btn btn-sm btn-outline';
+    document.getElementById('pho-btn-practice').className = mode==='practice' ? 'btn btn-sm btn-pri' : 'btn btn-sm btn-outline';
+    this.renderPhonetics();
+  },
+
+  renderPhonetics(){
+    const container = document.getElementById('phonetics-content');
+    const practiceEl = document.getElementById('phonetics-practice');
+
+    if(this.phoMode === 'practice'){
+      container.style.display = 'none';
+      practiceEl.style.display = 'block';
+      this.startPhoneticsPractice();
+      return;
+    }
+
+    container.style.display = 'block';
+    practiceEl.style.display = 'none';
+
+    let html = '';
+    PHO_GROUPS.forEach(group=>{
+      const phonemes = PHONEMES[group.key];
+      html += `<div class="section-title">${group.label}</div>`;
+      html += `<div class="phoneme-grid">`;
+      phonemes.forEach(p=>{
+        html += `<div class="phoneme-card" onclick="app.playPhoneme('${p.word}','${p.sym}',this)">
+          <div class="sym">${p.sym}</div>
+          <div class="ex">${p.ex}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+    this.markStudied();
+  },
+
+  async playPhoneme(word, sym, el){
+    el.classList.add('playing');
+    setTimeout(()=>el.classList.remove('playing'), 600);
+    await speak(word);
+  },
+
+  startPhoneticsPractice(){
+    const el = document.getElementById('phonetics-practice');
+    // Pick random phoneme
+    const allPhonemes = [];
+    PHO_GROUPS.forEach(g=>{ allPhonemes.push(...PHONEMES[g.key]); });
+    const target = allPhonemes[Math.floor(Math.random()*allPhonemes.length)];
+
+    // Pick 3 distractors
+    const others = allPhonemes.filter(p=>p.sym!==target.sym);
+    const distractors = [];
+    while(distractors.length < 3){
+      const r = others[Math.floor(Math.random()*others.length)];
+      if(!distractors.find(d=>d.sym===r.sym)) distractors.push(r);
+    }
+
+    const options = [target, ...distractors].sort(()=>Math.random()-0.5);
+    this.phoPractice = {target, options};
+
+    el.innerHTML = `
+      <div class="card" style="text-align:center">
+        <p style="font-size:1rem;color:var(--text2);margin-bottom:12px">👂 听发音，选择对应的音标</p>
+        <button class="btn btn-pri" onclick="speak('${target.word}')" style="margin-bottom:16px">🔊 播放发音</button>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          ${options.map((o,i)=>`
+            <button class="quiz-opt" style="font-size:1.2rem;font-family:Georgia,serif" onclick="app.answerPhonetics('${o.sym}',this)">${o.sym}<br><small style="font-size:.65rem;color:var(--text2)">${o.ex}</small></button>
+          `).join('')}
+        </div>
+        <p id="pho-result" style="margin-top:12px;font-weight:600;min-height:24px"></p>
+        <button class="btn btn-sm btn-outline" onclick="app.startPhoneticsPractice()" style="margin-top:8px">下一题 →</button>
+      </div>
+    `;
+    // Auto play
+    setTimeout(()=>speak(target.word), 300);
+  },
+
+  answerPhonetics(sym, btn){
+    const correct = sym === this.phoPractice.target.sym;
+    const resultEl = document.getElementById('pho-result');
+    if(correct){
+      btn.classList.add('correct');
+      resultEl.innerHTML = '<span style="color:var(--success)">✅ 正确！</span>';
+      this.addXP(5);
+    }else{
+      btn.classList.add('wrong');
+      resultEl.innerHTML = `<span style="color:var(--danger)">❌ 正确答案是 ${this.phoPractice.target.sym}</span>`;
+      // Highlight correct
+      btn.parentElement.querySelectorAll('.quiz-opt').forEach(b=>{
+        if(b.textContent.includes(this.phoPractice.target.sym)) b.classList.add('correct');
+      });
+    }
+    btn.parentElement.querySelectorAll('.quiz-opt').forEach(b=>b.style.pointerEvents='none');
+  },
+
+  /* ── Vocabulary ────────────────── */
+  renderVocabulary(){
+    // Category chips
+    const catEl = document.getElementById('vocab-cats');
+    catEl.innerHTML = VOCAB.map((c,i)=>`
+      <span class="cat-chip ${i===this.vocabCat?'active':''}" onclick="app.selectVocabCat(${i})">${c.icon} ${c.cat}</span>
+    `).join('');
+
+    this.renderVocabWords();
+    this.markStudied();
+  },
+
+  selectVocabCat(i){
+    this.vocabCat = i;
+    this.renderVocabulary();
+  },
+
+  renderVocabWords(){
+    const cat = VOCAB[this.vocabCat];
+    const wordsEl = document.getElementById('vocab-words');
+    const learned = new Set(this.data.learnedWords);
+    wordsEl.innerHTML = `
+      <div class="section-title">${cat.icon} ${cat.cat}</div>
+      ${cat.words.map((w,i)=>{
+        const isLearned = learned.has(w.en);
+        return `<div class="word-card" onclick="app.tapWord('${w.en}','${w.phon}',this)" data-word="${w.en}">
+          <span class="spk">🔊</span>
+          <span class="eng">${w.en}</span>
+          <span class="phon">${w.phon}</span>
+          ${isLearned ? '<span class="added">✓</span>' : ''}
+          <span class="chn">${w.zh}</span>
+        </div>`;
+      }).join('')}
+    `;
+  },
+
+  async tapWord(word, phon, el){
+    await speak(word);
+    // Add to learned if not already
+    if(!this.data.learnedWords.includes(word)){
+      this.data.learnedWords.push(word);
+      // Add to review queue
+      const exists = this.data.reviewQueue.find(r=>r.word===word);
+      if(!exists){
+        this.data.reviewQueue.push({
+          word, phon,
+          meaning: el.querySelector('.chn')?.textContent||'',
+          nextReview: Date.now() + 86400000, // review tomorrow
+          interval: 1, reps: 0, ef: 2.5,
+        });
+      }
+      saveData(this.data);
+      el.querySelector('.spk')?.insertAdjacentHTML('afterend','<span class="added">✓</span>');
+      this.addXP(5);
+      this.renderHome();
+    }
+  },
+
+  /* ── Lessons ───────────────────── */
+  renderLessons(){
+    const d = this.data;
+    const el = document.getElementById('lessons-list');
+    let html = '';
+
+    LESSONS.forEach((level, li)=>{
+      const isUnlocked = d.xp >= level.xpRequired;
+      const allDone = level.lessons.every(l=>d.completedLessons.includes(l.id));
+
+      html += `<div class="level-header">
+        <div class="level-icon ${!isUnlocked?'locked':allDone?'done':'current'}">${level.icon}</div>
+        <div>
+          <div style="font-weight:700">${level.name} <span style="font-size:.75rem;color:var(--text2)">Lv.${li+1}</span></div>
+          <div style="font-size:.72rem;color:var(--text2)}">需 ${level.xpRequired} XP ${isUnlocked?'✅ 已解锁':'🔒 未解锁'}</div>
+        </div>
+      </div>`;
+
+      level.lessons.forEach((lesson, i)=>{
+        const isDone = d.completedLessons.includes(lesson.id);
+        // Can do this lesson if level unlocked and previous lesson done (or it's the first)
+        const prevDone = i===0 || d.completedLessons.includes(level.lessons[i-1].id);
+        const canDo = isUnlocked && (prevDone || isDone);
+
+        html += `<div class="lesson-item ${!canDo?'locked':''}" onclick="${canDo?`app.openLesson('${lesson.id}',${li},${i})`:'app.toast(\'🔒 请先完成前面的课程\')'}">
+          <div class="idx ${isDone?'done':canDo?'current':'locked'}">${isDone?'✓':i+1}</div>
+          <div class="info">
+            <div class="title">${lesson.title}</div>
+            <div class="desc">${lesson.desc}</div>
+          </div>
+          <span style="color:var(--text2)">${isDone?'✅':canDo?'▶':'🔒'}</span>
+        </div>`;
+      });
+    });
+
+    el.innerHTML = html;
+    this.markStudied();
+  },
+
+  openLesson(lessonId, levelIdx, lessonIdx){
+    const level = LESSONS[levelIdx];
+    const lesson = level.lessons[lessonIdx];
+
+    document.getElementById('modal-title').textContent = lesson.title;
+    document.getElementById('modal-body').innerHTML = lesson.content;
+    document.getElementById('lesson-modal').classList.add('active');
+    document.getElementById('lesson-modal').dataset.lessonId = lessonId;
+    document.getElementById('lesson-modal').dataset.levelIdx = levelIdx;
+
+    // Scroll to top
+    document.getElementById('lesson-modal').scrollTop = 0;
+    this.markStudied();
+  },
+
+  closeLesson(){
+    document.getElementById('lesson-modal').classList.remove('active');
+    speechSynthesis.cancel();
+  },
+
+  checkLessonQuiz(el){
+    const parent = el.parentElement;
+    const allOpts = parent.querySelectorAll('.q-opt');
+    if(parent.dataset.answered) return;
+    parent.dataset.answered = 'true';
+
+    const isCorrect = el.dataset.correct === 'true';
+    if(isCorrect){
+      el.classList.add('correct');
+      this.addXP(15);
+      // Mark lesson as completed
+      const modal = document.getElementById('lesson-modal');
+      const lessonId = modal.dataset.lessonId;
+      if(lessonId && !this.data.completedLessons.includes(lessonId)){
+        this.data.completedLessons.push(lessonId);
+        saveData(this.data);
+        this.toast('🎉 课程完成！+15 XP');
+      }
+    }else{
+      el.classList.add('wrong');
+      allOpts.forEach(o=>{ if(o.dataset.correct==='true') o.classList.add('correct'); });
+    }
+    allOpts.forEach(o=>o.style.pointerEvents='none');
+  },
+
+  /* ── Review ────────────────────── */
+  renderReview(){
+    const el = document.getElementById('review-content');
+    const due = this.getDueReviews();
+
+    if(due.length === 0){
+      el.innerHTML = `
+        <div class="empty-state">
+          <div class="emoji">🎉</div>
+          <p>今日没有待复习的内容</p>
+          <p style="font-size:.8rem;color:var(--text2)">去学习新单词来充实复习队列吧</p>
+          <button class="btn btn-pri" onclick="app.navTo('vocabulary')" style="margin-top:12px">📚 去学单词</button>
+        </div>
+      `;
+      return;
+    }
+
+    this.reviewIndex = 0;
+    this.renderFlashcard(due);
+    this.markStudied();
+  },
+
+  renderFlashcard(due){
+    const el = document.getElementById('review-content');
+    if(this.reviewIndex >= due.length){
+      el.innerHTML = `
+        <div class="empty-state">
+          <div class="emoji">🏆</div>
+          <p>本轮复习完成！</p>
+          <p style="font-size:.8rem;color:var(--text2)">今天又进步了一点点</p>
+          <button class="btn btn-pri" onclick="app.navTo('home')" style="margin-top:12px">🏠 返回首页</button>
+        </div>
+      `;
+      this.renderHome();
+      return;
+    }
+
+    const item = due[this.reviewIndex];
+    el.innerHTML = `
+      <p style="text-align:center;color:var(--text2);font-size:.8rem;margin-bottom:8px">${this.reviewIndex+1} / ${due.length} · 点击翻转</p>
+      <div class="flashcard" id="flashcard" onclick="app.flipCard()">
+        <div class="front">
+          <div class="word">${item.word}</div>
+          <div class="phonetic">${item.phon||''}</div>
+          <div class="hint">👆 点击查看释义</div>
+        </div>
+      </div>
+      <div class="rating-btns" id="rating-btns" style="display:none">
+        <button class="rating-btn r0" onclick="app.rateCard(0)"><span class="emoji">😰</span>忘记了</button>
+        <button class="rating-btn r1" onclick="app.rateCard(1)"><span class="emoji">🤔</span>困难</button>
+        <button class="rating-btn r2" onclick="app.rateCard(2)"><span class="emoji">😊</span>良好</button>
+        <button class="rating-btn r3" onclick="app.rateCard(3)"><span class="emoji">🚀</span>简单</button>
+      </div>
+    `;
+  },
+
+  flipCard(){
+    const card = document.getElementById('flashcard');
+    if(!card || card.dataset.flipped) return;
+    card.dataset.flipped = 'true';
+
+    const due = this.getDueReviews();
+    const item = due[this.reviewIndex];
+
+    card.innerHTML = `
+      <div class="back">
+        <div class="meaning">${item.meaning}</div>
+        <div class="phonetic">${item.phon||''}</div>
+        <button class="btn btn-sm btn-outline" onclick="event.stopPropagation();speak('${item.word}')" style="margin-top:10px">🔊 听发音</button>
+      </div>
+    `;
+    document.getElementById('rating-btns').style.display = 'grid';
+  },
+
+  rateCard(quality){
+    const due = this.getDueReviews();
+    const item = due[this.reviewIndex];
+    const idx = this.data.reviewQueue.findIndex(r=>r.word===item.word);
+    if(idx >= 0){
+      this.data.reviewQueue[idx] = sm2Review(this.data.reviewQueue[idx], quality);
+      saveData(this.data);
+    }
+    this.addXP(3);
+    this.reviewIndex++;
+    this.renderFlashcard(due);
+  },
+
+  /* ── Quiz ──────────────────────── */
+  startQuiz(){
+    const el = document.getElementById('quiz-content');
+    // Update active tab
+    document.querySelectorAll('.quiz-type-btn').forEach(b=>{
+      b.classList.remove('active');
+      if((b.textContent.includes('释义')&&this.quizMode==='match')||
+         (b.textContent.includes('听音')&&this.quizMode==='listen')||
+         (b.textContent.includes('选词')&&this.quizMode==='fill')){
+        b.classList.add('active');
+      }
+    });
+
+    if(this.quizMode === 'match') this.startMatchQuiz();
+    else if(this.quizMode === 'listen') this.startListenQuiz();
+    else if(this.quizMode === 'fill') this.startFillQuiz();
+    this.markStudied();
+  },
+
+  startMatchQuiz(){
+    // Pick 5 random words from vocab
+    const allWords = [];
+    VOCAB.forEach(c=>allWords.push(...c.words));
+    const shuffled = [...allWords].sort(()=>Math.random()-0.5);
+    const pool = shuffled.slice(0,5);
+
+    this.quizState = {
+      type:'match', words:pool,
+      selectedEn: null,
+      matched: {},
+      score:0, total:5,
+    };
+
+    const enShuffled = [...pool].sort(()=>Math.random()-0.5);
+    const zhShuffled = [...pool].sort(()=>Math.random()-0.5);
+
+    document.getElementById('quiz-content').innerHTML = `
+      <div class="quiz-card">
+        <div class="question">🔤 点击英文单词，再点击对应中文释义（${0}/5）</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <div style="font-weight:600;margin-bottom:6px;font-size:.8rem;color:var(--text2)">English</div>
+            ${enShuffled.map(w=>`
+              <div class="quiz-opt match-en" data-word="${w.en}" onclick="app.matchSelectEn('${w.en}',this)" style="margin-bottom:6px">${w.en}</div>
+            `).join('')}
+          </div>
+          <div>
+            <div style="font-weight:600;margin-bottom:6px;font-size:.8rem;color:var(--text2)">中文</div>
+            ${zhShuffled.map(w=>`
+              <div class="quiz-opt match-zh" data-word="${w.en}" onclick="app.matchSelectZh('${w.en}',this)" style="margin-bottom:6px">${w.zh}</div>
+            `).join('')}
+          </div>
+        </div>
+        <button class="btn btn-sm btn-outline" onclick="app.startMatchQuiz()" style="margin-top:12px;width:100%">🔄 换一组</button>
+      </div>
+    `;
+  },
+
+  matchSelectEn(word, el){
+    document.querySelectorAll('.match-en').forEach(e=>e.style.outline='none');
+    el.style.outline = '2px solid var(--pri)';
+    this.quizState.selectedEn = word;
+  },
+
+  matchSelectZh(word, el){
+    const state = this.quizState;
+    if(!state.selectedEn) return;
+    if(state.matched[state.selectedEn]) return;
+
+    const enEl = document.querySelector(`.match-en[data-word="${state.selectedEn}"]`);
+    const zhEl = document.querySelector(`.match-zh[data-word="${word}"]`);
+
+    if(state.selectedEn === word){
+      // Correct match!
+      state.matched[word] = true;
+      state.score++;
+      enEl.classList.add('correct'); enEl.style.outline='none';
+      zhEl.classList.add('correct');
+      this.addXP(5);
+
+      document.querySelector('.quiz-card .question').textContent =
+        `🔤 点击英文单词，再点击对应中文释义（${state.score}/5）`;
+
+      if(state.score >= state.total){
+        setTimeout(()=>{
+          document.getElementById('quiz-content').innerHTML += `
+            <div style="text-align:center;margin-top:16px">
+              <div class="quiz-score">🏆 全部正确！</div>
+              <button class="btn btn-pri" onclick="app.startMatchQuiz()">再来一组</button>
+            </div>
+          `;
+          this.addXP(20);
+        }, 500);
+      }
+    }else{
+      enEl.style.outline='2px solid var(--danger)';
+      setTimeout(()=>{ enEl.style.outline='none'; }, 500);
+    }
+    state.selectedEn = null;
+  },
+
+  startListenQuiz(){
+    const allWords = [];
+    VOCAB.forEach(c=>allWords.push(...c.words));
+    const target = allWords[Math.floor(Math.random()*allWords.length)];
+    const others = allWords.filter(w=>w.en!==target.en);
+    const distractors = [];
+    while(distractors.length < 3){
+      const r = others[Math.floor(Math.random()*others.length)];
+      if(!distractors.find(d=>d.en===r.en)) distractors.push(r);
+    }
+
+    this.quizState = { type:'listen', target, options:[target,...distractors].sort(()=>Math.random()-0.5), answered:false };
+
+    document.getElementById('quiz-content').innerHTML = `
+      <div class="quiz-card" style="text-align:center">
+        <div class="question">👂 听发音，选择正确的单词</div>
+        <button class="btn btn-pri" onclick="speak('${target.en}')" style="margin:12px 0">🔊 播放发音</button>
+        <div class="quiz-options">
+          ${this.quizState.options.map(w=>`
+            <div class="quiz-opt" onclick="app.answerListen('${w.en}',this)">${w.en} <span style="font-size:.7rem;color:var(--text2)">${w.phon}</span></div>
+          `).join('')}
+        </div>
+        <p id="listen-result" style="margin-top:12px;font-weight:600;min-height:24px"></p>
+        <button class="btn btn-sm btn-outline" onclick="app.startListenQuiz()" style="margin-top:8px">下一题 →</button>
+      </div>
+    `;
+    // Auto play
+    setTimeout(()=>speak(target.en), 500);
+  },
+
+  answerListen(word, btn){
+    if(this.quizState.answered) return;
+    this.quizState.answered = true;
+    const correct = word === this.quizState.target.en;
+    const resultEl = document.getElementById('listen-result');
+    if(correct){
+      btn.classList.add('correct');
+      resultEl.innerHTML = '<span style="color:var(--success)">✅ 正确！</span>';
+      this.addXP(10);
+    }else{
+      btn.classList.add('wrong');
+      resultEl.innerHTML = `<span style="color:var(--danger)">❌ 正确答案：${this.quizState.target.en}</span>`;
+      btn.parentElement.querySelectorAll('.quiz-opt').forEach(b=>{
+        if(b.textContent.startsWith(this.quizState.target.en)) b.classList.add('correct');
+      });
+    }
+    btn.parentElement.querySelectorAll('.quiz-opt').forEach(b=>b.style.pointerEvents='none');
+  },
+
+  startFillQuiz(){
+    const q = FILL_SENTENCES[Math.floor(Math.random()*FILL_SENTENCES.length)];
+    this.quizState = { type:'fill', answer:q.a, answered:false };
+
+    document.getElementById('quiz-content').innerHTML = `
+      <div class="quiz-card">
+        <div class="question">✏️ 选择合适的单词填空</div>
+        <p style="font-size:1.05rem;margin:16px 0;padding:14px;background:var(--pri-light);border-radius:var(--radius-sm);line-height:1.8">
+          ${q.s.replace('___','<strong style="border-bottom:2px solid var(--pri);padding:0 8px">___</strong>')}
+        </p>
+        <p style="font-size:.75rem;color:var(--text2);margin-bottom:12px">点击单词选择</p>
+        <div class="quiz-options">
+          ${q.opts.map(o=>`
+            <div class="quiz-opt" onclick="app.answerFill('${o}',this)">${o}</div>
+          `).join('')}
+        </div>
+        <p id="fill-result" style="margin-top:12px;font-weight:600;min-height:24px;text-align:center"></p>
+        <button class="btn btn-sm btn-outline" onclick="app.startFillQuiz()" style="margin-top:8px;width:100%">下一题 →</button>
+      </div>
+    `;
+  },
+
+  answerFill(word, btn){
+    if(this.quizState.answered) return;
+    this.quizState.answered = true;
+    const correct = word === this.quizState.answer;
+    const resultEl = document.getElementById('fill-result');
+    if(correct){
+      btn.classList.add('correct');
+      resultEl.innerHTML = '<span style="color:var(--success)">✅ 正确！</span>';
+      this.addXP(10);
+    }else{
+      btn.classList.add('wrong');
+      resultEl.innerHTML = `<span style="color:var(--danger)">❌ 正确答案：${this.quizState.answer}</span>`;
+      btn.parentElement.querySelectorAll('.quiz-opt').forEach(b=>{
+        if(b.textContent===this.quizState.answer) b.classList.add('correct');
+      });
+    }
+    btn.parentElement.querySelectorAll('.quiz-opt').forEach(b=>b.style.pointerEvents='none');
+  },
+
+  renderAll(){
+    this.renderHome();
+  },
+};
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+app.init();
+</script>
+</body>
+</html>
